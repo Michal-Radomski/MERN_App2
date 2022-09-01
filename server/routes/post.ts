@@ -7,7 +7,7 @@ const {create} = require("../controllers/post");
 
 const router = express.Router();
 
-// Route
+//* Route v1
 // router.get("/*", (req: Request, res: Response) => {
 //   console.log("req.ip:", req.ip);
 //   //   res.json({
@@ -15,6 +15,9 @@ const router = express.Router();
 //   // });
 //   res.send("<h1 style='color:darkblue;text-align:center'>API is running</h1>");
 // });
-router.get("/post", create);
+// router.get("/post", create);
+
+//* Route v2
+router.post("/post", create);
 
 module.exports = router;

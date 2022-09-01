@@ -1,10 +1,13 @@
 const express = require("express");
-import {Request, Response} from "express";
+// import {Request, Response} from "express";
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+
+// Import routes
+const postRoutes = require("./routes/post");
 
 // App
 const app = express();
@@ -25,14 +28,9 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
-// Route
-app.get("/", (req: Request, res: Response) => {
-  console.log("req.ip:", req.ip);
-  //   res.json({
-  //     data: 'You Reached Nodejs API For React-Node CRUD App'
-  // });
-  res.send("<h1 style='color:darkblue;text-align:center'>API is running</h1>");
-});
+// Route -> moved to routes folder //* app.get ....
+//Route middleware
+app.use("/api", postRoutes);
 
 // Port
 const port = (process.env.PORT || 5000) as number;

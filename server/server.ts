@@ -1,6 +1,3 @@
-//+
-// const {ObjectId} = mongoose.Schema;
-
 const express = require("express");
 import {Request, Response} from "express";
 const morgan = require("morgan");

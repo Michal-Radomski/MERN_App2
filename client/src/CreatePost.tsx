@@ -1,14 +1,19 @@
 import React from "react";
 import axios from "axios";
+import {Link, useHistory} from "react-router-dom";
 
-const Create = (): JSX.Element => {
+import {Post} from "./Interfaces";
+
+const CreatePost = (): JSX.Element => {
   const [state, setState] = React.useState<Post>({
     title: "",
     content: "",
     user: "",
   });
 
-  // destructure values from state
+  const history = useHistory();
+
+  // Destructure values from state
   const {title, content, user} = state;
 
   // onChange event handler
@@ -31,13 +36,16 @@ const Create = (): JSX.Element => {
         // console.log({response});
         // Empty state
         setState({...state, title: "", content: "", user: ""});
-        // Show sucess alert
+        // Show success alert
         alert(`Post titled ${response.data.title} was created`);
       })
       .catch((error) => {
         console.error(error.response);
         alert(error.response.data.error);
       });
+    setTimeout(function () {
+      history.push("/");
+    }, 1000);
   };
 
   return (
@@ -80,7 +88,14 @@ const Create = (): JSX.Element => {
             />
           </div>
           <div>
-            <button className="btn btn-primary">Create</button>
+            <button className="btn btn-primary" type="submit">
+              Create
+            </button>
+            <button style={{float: "right", background: "none", padding: 0, border: "none"}}>
+              <Link to="/" className="btn btn-outline-primary">
+                Cancel
+              </Link>
+            </button>
           </div>
         </form>
       </div>
@@ -88,4 +103,4 @@ const Create = (): JSX.Element => {
   );
 };
 
-export default Create;
+export default CreatePost;

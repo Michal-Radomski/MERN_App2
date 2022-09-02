@@ -13,7 +13,7 @@ function App(): JSX.Element {
       .get(`${process.env.REACT_APP_API}/posts`)
       .then((response) => {
         const receivedPosts = response.data;
-        console.log({receivedPosts});
+        // console.log({receivedPosts});
         // console.info({receivedPosts});
         // console.error({receivedPosts});
         // console.warn({receivedPosts});

@@ -4,6 +4,7 @@ import axios from "axios";
 import {Post} from "./Interfaces";
 
 const SinglePost = (props: {match: {params: {slug: string}}}): JSX.Element => {
+  // console.log({props});
   const [post, setPost] = React.useState<Post>({
     slug: "",
     updatedAt: undefined,
@@ -23,6 +24,7 @@ const SinglePost = (props: {match: {params: {slug: string}}}): JSX.Element => {
 
   return (
     <div className="container pb-5">
+      {/* {JSON.stringify(props)} */}
       <br />
       <h1>{post?.title}</h1>
       <p className="lead">{post?.content}</p>

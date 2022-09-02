@@ -3,19 +3,9 @@ const slugify = require("slugify");
 
 const Post = require("../models/post");
 
-// exports.create = (req: Request, res: Response) => {
-//   console.log("req.ip:", req.ip);
-//   // res.send("<h1 style='color:darkblue;text-align:center'>API is running</h1>");
-//   res.json({
-//     data: "You Reached Nodejs API For React-Node CRUD App - controllers",
-//   });
-// };
-
 exports.create = (req: Request, res: Response) => {
   console.log("req.body:", req.body);
   const {title, content, user} = req.body;
-  const slug = slugify(title, {lower: true}); //* My Post -> my-post
-  console.log({slug});
 
   // Validate
   switch (true) {
@@ -27,6 +17,10 @@ exports.create = (req: Request, res: Response) => {
     default:
       console.log("Everything ok");
   }
+
+  const slug = slugify(title, {lower: true}); //* My Post -> my-post
+  console.log({slug});
+
   // Create a Post
   Post.create({title, content, user, slug}, (error: string, post: Object) => {
     if (error) {

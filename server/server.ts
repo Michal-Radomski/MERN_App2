@@ -1,5 +1,8 @@
+//+
+// const {ObjectId} = mongoose.Schema;
+
 const express = require("express");
-// import {Request, Response} from "express";
+import {Request, Response} from "express";
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -28,7 +31,11 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
-// Route -> moved to routes folder //* app.get ....
+// Route -> Other routes moved to routes folder
+app.get("/", (req: Request, res: Response) => {
+  console.log("req.ip:", req.ip);
+  res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
+});
 //Route middleware
 app.use("/api", postRoutes);
 

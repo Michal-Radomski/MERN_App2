@@ -10,3 +10,8 @@ interface Post {
   content: string;
   user: string;
 }
+
+interface User {
+  name: string;
+  password: string;
+}

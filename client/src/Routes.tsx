@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 import App from "./App";
 import CreatePost from "./CreatePost";
+import Login from "./Login";
 import Navigation from "./Navigation";
 import SinglePost from "./SinglePost";
 import UpdatePost from "./UpdatePost";
@@ -16,6 +17,7 @@ const Routes = (): JSX.Element => {
         <Navigation />
         <Switch>
           <Route path="/" exact={true} component={App} />
+          <Route path="/login" exact={true} component={Login} />
           <Route path="/create" exact={true} component={CreatePost} />
           <Route path="/post/:slug" exact={true} component={SinglePost} />
           <Route path="/post/update/:slug" exact={true} component={UpdatePost} />

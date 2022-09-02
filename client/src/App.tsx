@@ -26,6 +26,24 @@ function App(): JSX.Element {
     fetchPosts();
   }, []);
 
+  const deleteConfirm = (slug: string) => {
+    let answer = window.confirm("Are you sure you want to delete this post?");
+    if (answer) {
+      deletePost(slug);
+    }
+  };
+
+  const deletePost = (slug: string) => {
+    // console.log("Post will be deleted:", slug);
+    axios
+      .delete(`${process.env.REACT_APP_API}/post/${slug}`)
+      .then((response) => {
+        alert(response.data.message);
+        fetchPosts();
+      })
+      .catch((error) => alert("Error deleting post:" + error));
+  };
+
   return (
     <React.Fragment>
       <div className="container pb-5 pt-5"></div>
@@ -57,7 +75,9 @@ function App(): JSX.Element {
                 <Link to={`/post/update/${post.slug}`} className="btn btn-sm btn-warning">
                   Update
                 </Link>
-                <button className="btn btn-sm btn-outline-danger ml-1">Delete</button>
+                <button className="btn btn-sm btn-outline-danger ml-1" onClick={() => deleteConfirm(post.slug as string)}>
+                  Delete
+                </button>
               </div>
             </div>
           </div>

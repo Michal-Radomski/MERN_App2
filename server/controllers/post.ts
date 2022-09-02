@@ -74,7 +74,7 @@ exports.remove = (req: Request, res: Response) => {
     }
     // console.log("Post: ", post, "was deleted");
     res.json({
-      message: "Post deleted",
+      message: "Post was deleted",
     });
   });
 };

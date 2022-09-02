@@ -24,11 +24,11 @@ const Create = (): JSX.Element => {
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.table({title, content, user});
+    // console.table({title, content, user});
     axios
       .post(`${process.env.REACT_APP_API}/post`, {title, content, user})
       .then((response) => {
-        console.log({response});
+        // console.log({response});
         // Empty state
         setState({...state, title: "", content: "", user: ""});
         // Show sucess alert
@@ -36,7 +36,6 @@ const Create = (): JSX.Element => {
       })
       .catch((error) => {
         console.error(error.response);
-
         alert(error.response.data.error);
       });
   };

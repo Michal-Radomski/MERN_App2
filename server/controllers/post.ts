@@ -15,11 +15,11 @@ exports.create = (req: Request, res: Response) => {
     case !content:
       return res.status(400).json({error: "Content is required"});
     default:
-      console.log("Everything ok");
+      console.log("Post was created");
   }
 
   const slug = slugify(title, {lower: true}); //* My Post -> my-post
-  console.log({slug});
+  // console.log({slug});
 
   // Create a Post
   Post.create({title, content, user, slug}, (error: string, post: Object) => {
@@ -27,7 +27,7 @@ exports.create = (req: Request, res: Response) => {
       console.log({error});
       res.status(400).json({error: "Duplicate post. Try another title"});
     }
-    console.log({post});
+    // console.log({post});
     res.json(post);
   });
 };

@@ -36,10 +36,22 @@ exports.list = (_req: Request, res: Response) => {
   Post.find({})
     .limit(10)
     .sort({createdAt: -1}) // Last post on the top
-    .exec((err: string, posts: Object[]) => {
-      if (err) {
-        console.log(err);
+    .exec((error: string, posts: Object[]) => {
+      if (error) {
+        console.log(error);
       }
       res.json(posts);
     });
+};
+
+exports.read = (req: Request, res: Response) => {
+  const {slug} = req.params;
+  // console.log({slug});
+  Post.findOne({slug: slug}).exec((error: string, post: Object) => {
+    if (error) {
+      console.log(error);
+    }
+    // console.log({post});
+    res.json(post);
+  });
 };

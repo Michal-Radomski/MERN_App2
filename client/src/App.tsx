@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 import "./App.scss";
 import {Post} from "./Interfaces";
@@ -33,16 +34,18 @@ function App(): JSX.Element {
       {posts.map((post: Post) => (
         <div className="row" key={post._id} style={{borderBottom: "1px solid silver"}}>
           <div className="col pt-3 pb-2">
-            <h2>{post.title}</h2>
+            <Link to={`/post/${post.slug}`}>
+              <h2>{post.title}</h2>
+            </Link>
             <p className="lead">{post.content.substring(0, 100)}</p>
             <p>
               Author: <span className="badge">{post.user}</span> Published on:{" "}
-              <span className="badge">{new Date(post.createdAt).toLocaleString()}</span>
-              {post.createdAt.toLocaleString() !== post.updatedAt.toLocaleString() && (
+              <span className="badge">{new Date(post.createdAt as Date).toLocaleString()}</span>
+              {(post.createdAt as Date) < (post.updatedAt as Date) && (
                 <>
                   Updated on:{" "}
                   <span className="badge" style={{color: "brown"}}>
-                    {new Date(post.updatedAt).toLocaleString()}
+                    {new Date(post.updatedAt as Date).toLocaleString()}
                   </span>
                 </>
               )}

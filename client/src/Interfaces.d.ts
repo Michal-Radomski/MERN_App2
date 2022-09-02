@@ -2,9 +2,10 @@
 
 import {Types} from "mongoose";
 interface Post {
-  updatedAt: Date;
+  slug: string;
+  updatedAt: Date | undefined;
   _id: Types.ObjectId;
-  createdAt: Date;
+  createdAt: Date | undefined;
   title: string;
   content: string;
   user: string;

@@ -31,3 +31,15 @@ exports.create = (req: Request, res: Response) => {
     res.json(post);
   });
 };
+
+exports.list = (_req: Request, res: Response) => {
+  Post.find({})
+    .limit(10)
+    .sort({createdAt: -1}) // Last post on the top
+    .exec((err: string, posts: Object[]) => {
+      if (err) {
+        console.log(err);
+      }
+      res.json(posts);
+    });
+};

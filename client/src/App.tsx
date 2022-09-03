@@ -73,8 +73,8 @@ function App(): JSX.Element {
                 </p>
               </div>
               <div className="col-md">
-                <Link to={`/post/update/${post.slug}`} className="btn btn-sm btn-warning">
-                  Update
+                <Link to={`/post/update/${post.slug}`} className="btn btn-sm btn-warning" style={{width: "57px"}}>
+                  Edit
                 </Link>
                 <button className="btn btn-sm btn-outline-danger ml-1" onClick={() => deleteConfirm(post.slug as string)}>
                   Delete

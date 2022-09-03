@@ -25,7 +25,7 @@ const Login = (props: {history: string[]}): JSX.Element => {
       .post(`${process.env.REACT_APP_API}/login`, {name, password})
       .then((response) => {
         // console.log({response});
-        // Response will contain token and name and redirect to main page "/"
+        // Response will contain token and name and redirect to the main page "/"
         authenticate(response, () => props.history.push("/"));
       })
       .catch((error) => {

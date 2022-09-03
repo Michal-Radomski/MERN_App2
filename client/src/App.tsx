@@ -5,6 +5,7 @@ import renderHTML from "react-render-html";
 
 import "./App.scss";
 import {Post} from "./Interfaces";
+import {getToken, getUser} from "./helpers";
 
 function App(): JSX.Element {
   const [posts, setPosts] = React.useState<Post[]>([]);
@@ -37,7 +38,11 @@ function App(): JSX.Element {
   const deletePost = (slug: string) => {
     // console.log("Post will be deleted:", slug);
     axios
-      .delete(`${process.env.REACT_APP_API}/post/${slug}`)
+      .delete(`${process.env.REACT_APP_API}/post/${slug}`, {
+        headers: {
+          authorization: `Bearer ${getToken()}`,
+        },
+      })
       .then((response) => {
         alert(response.data.message);
         fetchPosts();
@@ -72,14 +77,16 @@ function App(): JSX.Element {
                   )}
                 </p>
               </div>
-              <div className="col-md">
-                <Link to={`/post/update/${post.slug}`} className="btn btn-sm btn-warning" style={{width: "57px"}}>
-                  Edit
-                </Link>
-                <button className="btn btn-sm btn-outline-danger ml-1" onClick={() => deleteConfirm(post.slug as string)}>
-                  Delete
-                </button>
-              </div>
+              {getUser() && (
+                <div className="col-md-2">
+                  <Link to={`/post/update/${post.slug}`} className="btn btn-sm btn-warning" style={{width: "57px"}}>
+                    Edit
+                  </Link>
+                  <button className="btn btn-sm btn-outline-danger ml-1" onClick={() => deleteConfirm(post.slug as string)}>
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 const jwt = require("jsonwebtoken");
+const {expressjwt: expressJwt} = require("express-jwt");
 
 exports.login = (req: Request, res: Response) => {
   const {name, password} = req.body;
@@ -14,3 +15,9 @@ exports.login = (req: Request, res: Response) => {
     });
   }
 };
+
+exports.requireSignIn = expressJwt({
+  secret: process.env.JWT_SECRET,
+  algorithms: ["HS256"],
+  userProperty: "auth",
+});

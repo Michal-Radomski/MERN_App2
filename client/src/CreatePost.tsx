@@ -5,7 +5,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 
 import {Post} from "./Interfaces";
-import {getUser} from "./helpers";
+import {getUser, getToken} from "./helpers";
 
 const CreatePost = (): JSX.Element => {
   const [state, setState] = React.useState<Post>({
@@ -34,7 +34,15 @@ const CreatePost = (): JSX.Element => {
     event.preventDefault();
     // console.table({title, content, user});
     axios
-      .post(`${process.env.REACT_APP_API}/post`, {title, content, user})
+      .post(
+        `${process.env.REACT_APP_API}/post`,
+        {title, content, user},
+        {
+          headers: {
+            authorization: `Bearer ${getToken()}`,
+          },
+        }
+      )
       .then((response) => {
         // console.log({response});
         // Empty state

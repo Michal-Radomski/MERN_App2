@@ -5,6 +5,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 
 import {Post} from "./Interfaces";
+import {getToken} from "./helpers";
 
 const UpdatePost = (props: {match: {params: {slug: string}}}): JSX.Element => {
   const [state, setState] = React.useState<Post>({
@@ -38,7 +39,15 @@ const UpdatePost = (props: {match: {params: {slug: string}}}): JSX.Element => {
     event.preventDefault();
     // console.table({title, content, user});
     axios
-      .put(`${process.env.REACT_APP_API}/post/${slug}`, {title, content, user})
+      .put(
+        `${process.env.REACT_APP_API}/post/${slug}`,
+        {title, content, user},
+        {
+          headers: {
+            authorization: `Bearer ${getToken()}`,
+          },
+        }
+      )
       .then((response) => {
         // console.log("response.data:", response.data);
         const {title, content, slug, user} = response.data;

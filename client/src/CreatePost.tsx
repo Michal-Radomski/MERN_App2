@@ -5,11 +5,12 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 
 import {Post} from "./Interfaces";
+import {getUser} from "./helpers";
 
 const CreatePost = (): JSX.Element => {
   const [state, setState] = React.useState<Post>({
     title: "",
-    user: "",
+    user: getUser(),
   });
   const [content, setContent] = React.useState<string>("");
 
@@ -37,7 +38,8 @@ const CreatePost = (): JSX.Element => {
       .then((response) => {
         // console.log({response});
         // Empty state
-        setState({...state, title: "", content: "", user: ""});
+        setState({...state, title: "", user: ""});
+        setContent("");
         // Show success alert
         alert(`Post titled ${response.data.title} was created`);
       })

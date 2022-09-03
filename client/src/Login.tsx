@@ -1,10 +1,12 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import axios from "axios";
 
 import {User} from "./Interfaces";
+import {authenticate} from "./helpers";
 
-const Login = (): JSX.Element => {
+const Login = (props: {history: string[]}): JSX.Element => {
+  // console.log({props});
   const [state, setState] = React.useState<User>({
     name: "",
     password: "",
@@ -18,13 +20,13 @@ const Login = (): JSX.Element => {
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.table({name, password});
+    // console.table({name, password});
     axios
       .post(`${process.env.REACT_APP_API}/login`, {name, password})
       .then((response) => {
         // console.log({response});
-        // Response will contain token and name
-        // Redirect to create page
+        // Response will contain token and name and redirect to main page "/"
+        authenticate(response, () => props.history.push("/"));
       })
       .catch((error) => {
         console.log(error.response);
@@ -73,4 +75,4 @@ const Login = (): JSX.Element => {
   );
 };
 
-export default Login;
+export default withRouter(Login as React.FC<any>);

@@ -1,29 +1,31 @@
 import React from "react";
 import axios from "axios";
 import {Link, useHistory} from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.bubble.css";
 
 import {Post} from "./Interfaces";
 
 const CreatePost = (): JSX.Element => {
   const [state, setState] = React.useState<Post>({
     title: "",
-    content: "",
     user: "",
   });
+  const [content, setContent] = React.useState<string>("");
 
   const history = useHistory();
 
   // Destructure values from state
-  const {title, content, user} = state;
+  const {title, user} = state;
 
   // onChange event handler
-  const handleChange = (name: string) => (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    // console.log("name:", name, "event:", (event.target as HTMLInputElement | HTMLTextAreaElement).value);
-    setState({...state, [name]: (event.target as HTMLInputElement | HTMLTextAreaElement).value});
+  const handleChange = (name: string) => (event: React.FormEvent<HTMLInputElement>) => {
+    // console.log("name:", name, "event:", (event.target as HTMLInputElement ).value);
+    setState({...state, [name]: (event.target as HTMLInputElement).value});
   };
   // function handleChange(name: string) {
-  //   return function (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) {
-  //     setState({...state, [name]: (event.target as HTMLInputElement | HTMLTextAreaElement).value});
+  //   return function (event: React.FormEvent<HTMLInputElement >) {
+  //     setState({...state, [name]: (event.target as HTMLInputElement ).value});
   //   };
   // }
 
@@ -48,6 +50,12 @@ const CreatePost = (): JSX.Element => {
     }, 1000);
   };
 
+  // Rich text editor handle change
+  const handleContent = (event: React.SetStateAction<string>) => {
+    // console.log({event});
+    setContent(event);
+  };
+
   return (
     <React.Fragment>
       <div className="container p-5">
@@ -68,12 +76,13 @@ const CreatePost = (): JSX.Element => {
           </div>
           <div className="form-group">
             <label className="text-muted">Content</label>
-            <textarea
-              className="form-control"
-              placeholder="Write something.."
-              required
-              onChange={handleChange("content")}
+            <ReactQuill
+              onChange={handleContent}
               value={content}
+              theme="bubble"
+              className="pb-5 mb-3"
+              placeholder="Write something.."
+              style={{border: "1px solid #666"}}
             />
           </div>
           <div className="form-group">

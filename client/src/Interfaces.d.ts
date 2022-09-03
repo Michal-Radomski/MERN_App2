@@ -7,7 +7,7 @@ interface Post {
   _id?: Types.ObjectId;
   createdAt?: Date | undefined;
   title: string;
-  content: string;
+  content?: string;
   user: string;
 }
 

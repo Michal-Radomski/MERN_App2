@@ -57,7 +57,7 @@ function App(): JSX.Element {
                 <Link to={`/post/${post.slug}`}>
                   <h2>{post.title}</h2>
                 </Link>
-                <p className="lead">{post.content.substring(0, 100)}</p>
+                <p className="lead">{post?.content?.substring(0, 100)}</p>
                 <p>
                   Author: <span className="badge">{post.user}</span> Published on:{" "}
                   <span className="badge">{new Date(post.createdAt as Date).toLocaleString()}</span>

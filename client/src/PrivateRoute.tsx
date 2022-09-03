@@ -1,5 +1,6 @@
 import React from "react";
 import {Route, Redirect} from "react-router-dom";
+
 import {getUser} from "./helpers";
 
 const PrivateRoute = ({component: Component, ...rest}: any): JSX.Element => {

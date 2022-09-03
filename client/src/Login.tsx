@@ -3,7 +3,7 @@ import {Link, withRouter} from "react-router-dom";
 import axios from "axios";
 
 import {User} from "./Interfaces";
-import {authenticate} from "./helpers";
+import {authenticate, getUser} from "./helpers";
 
 const Login = (props: {history: string[]}): JSX.Element => {
   // console.log({props});
@@ -12,6 +12,10 @@ const Login = (props: {history: string[]}): JSX.Element => {
     password: "",
   });
   const {name, password} = state;
+
+  React.useEffect(() => {
+    getUser() && props.history.push("/");
+  }, [props.history]);
 
   const handleChange = (name: string) => (event: React.FormEvent<HTMLInputElement>) => {
     // console.log('name:', name, 'event:', (event.target as HTMLInputElement).value);

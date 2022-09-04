@@ -26,7 +26,8 @@ const Login = (props: {history: string[]}): JSX.Element => {
     event.preventDefault();
     // console.table({name, password});
     axios
-      .post(`${process.env.REACT_APP_API}/login`, {name, password})
+      // .post(`${process.env.REACT_APP_API}/login`, {name, password})
+      .post(`/login`, {name, password})
       .then((response) => {
         // console.log({response});
         // Response will contain token and name and redirect to the main page "/"

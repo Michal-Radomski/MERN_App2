@@ -18,7 +18,8 @@ const SinglePost = (props: {match: {params: {slug: string}}}): JSX.Element => {
 
   React.useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/post/${props.match.params.slug}`)
+      // .get(`${process.env.REACT_APP_API}/post/${props.match.params.slug}`)
+      .get(`/post/${props.match.params.slug}`)
       .then((response) => setPost(response.data))
       .catch((error: string) => alert("Error loading single post:" + error));
   }, [props.match.params.slug]);

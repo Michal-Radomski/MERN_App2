@@ -20,7 +20,8 @@ const UpdatePost = (props: {match: {params: {slug: string}}}): JSX.Element => {
 
   React.useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/post/${props.match.params.slug}`)
+      // .get(`${process.env.REACT_APP_API}/post/${props.match.params.slug}`)
+      .get(`/post/${props.match.params.slug}`)
       .then((response) => {
         const {title, slug, user, content} = response.data;
         setState({title: title, slug: slug, user: user});
@@ -40,7 +41,8 @@ const UpdatePost = (props: {match: {params: {slug: string}}}): JSX.Element => {
     // console.table({title, content, user});
     axios
       .put(
-        `${process.env.REACT_APP_API}/post/${slug}`,
+        // `${process.env.REACT_APP_API}/post/${slug}`,
+        `/post/${slug}`,
         {title, content, user},
         {
           headers: {

@@ -12,7 +12,8 @@ function App(): JSX.Element {
 
   const fetchPosts = (): void => {
     axios
-      .get(`${process.env.REACT_APP_API}/posts`)
+      // .get(`${process.env.REACT_APP_API}/posts`)
+      .get(`/posts`)
       .then((response) => {
         const receivedPosts = response.data;
         // console.log({receivedPosts});
@@ -38,7 +39,8 @@ function App(): JSX.Element {
   const deletePost = (slug: string) => {
     // console.log("Post will be deleted:", slug);
     axios
-      .delete(`${process.env.REACT_APP_API}/post/${slug}`, {
+      // .delete(`${process.env.REACT_APP_API}/post/${slug}`, {
+      .delete(`/post/${slug}`, {
         headers: {
           authorization: `Bearer ${getToken()}`,
         },

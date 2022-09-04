@@ -35,7 +35,8 @@ const CreatePost = (): JSX.Element => {
     // console.table({title, content, user});
     axios
       .post(
-        `${process.env.REACT_APP_API}/post`,
+        // `${process.env.REACT_APP_API}/post`,
+        `/post`,
         {title, content, user},
         {
           headers: {

@@ -31,7 +31,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 // Route -> Other routes moved to routes folder
-// app.get("/", (req: Request, res: Response) => {
+// app.get("/test", (req: Request, res: Response) => {
 //   console.log("req.ip:", req.ip);
 //   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
 // });
